@@ -1,0 +1,14 @@
+---
+- name: Création repertoire de semaphore
+  ansible.builtin.file:
+    path: /opt/semaphore
+    state: directory
+
+- name: copy Docker Compose files
+  ansible.builtin.copy:
+    src: docker-compose.yml
+    dest: /opt/semaphore/docker-compose.yml
+
+- name: Docker-compose up -d
+  community.docker.docker_compose:
+    project_src: /opt/semaphore/
